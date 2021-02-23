@@ -1,0 +1,7 @@
+{
+  "brand":"Lifo test",
+  "body":"<html><body><p>Hi, $(name)<br><span> $(file_id) </span><br></p></body></html>",
+  "campaign_name": "Test campaign",
+  "brand_contact_name": "Alex Niu",
+  "brand_email": "alex.niu@lifo.ai"
+}

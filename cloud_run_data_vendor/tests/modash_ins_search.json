@@ -1,0 +1,43 @@
+{
+  "filter": {
+    "influencer": {
+      "followers": {
+        "min": 20000,
+        "max": 70000
+      },
+      "engagementRate": 0.02,
+      "location": [
+        148838,
+        307573,
+        79510
+      ],
+      "language": "en",
+      "hasYoutube": false,
+      "relevance": [
+        "#coffee"
+      ],
+      "interests": [
+        1708,
+        13
+      ]
+    },
+    "audience": {
+      "location": [
+        148838,
+        307573,
+        79510
+      ],
+      "language": "en",
+      "gender": "FEMALE",
+      "age": [
+        "18-24",
+        "65-"
+      ],
+      "interests": [
+        1708,
+        13
+      ]
+    }
+  },
+  "page": 0
+}

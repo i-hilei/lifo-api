@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  web:
+    container_name: web
+    build: ./
+    ports:
+      - "8080:8080"
+    links:
+      - redis
+    depends_on:
+      - redis
+
+  redis:
+    container_name: redis
+    image: redis:5.0.7
+    hostname: redis
+
+  worker:
+    build:
+      context: ./
+    hostname: worker
+    entrypoint: celery
+    command: ["-A", "celery_conf.celery", "worker", "-P", "eventlet", "-c", "8", "--loglevel=INFO"]
+    links:
+      - redis
+    depends_on:
+      - redis

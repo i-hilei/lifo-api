@@ -1,0 +1,5 @@
+{
+  "SECRET_KEY": "this is top secret",
+  "NYLAS_OAUTH_CLIENT_ID": "eb2syukweshnr62eiovmkqsgb",
+  "NYLAS_OAUTH_CLIENT_SECRET": "83ttw20jzg5vzo4jlk0086lav"
+}

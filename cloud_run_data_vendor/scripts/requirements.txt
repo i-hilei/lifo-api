@@ -1,0 +1,4 @@
+firebase_admin
+sendgrid
+google-cloud-secret-manager
+nylas

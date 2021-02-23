@@ -1,0 +1,23 @@
+{
+  "field_range_filters": [
+    {
+      "name": "followers",
+      "min": 4000,
+      "max": 100000
+    }
+  ],
+  "field_contain_filters": [
+    {
+      "name": "gender",
+      "value": "MALE"
+    }
+  ],
+  "prefix_filters": [
+    {
+      "prefix": "languages",
+      "value": "Chinese",
+      "min": 0,
+      "max": 0.10
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+build container remotely on GCP cloud build:
+gcloud builds submit --tag gcr.io/influencer-272204/data_vendor
+
+The following deploys the remotely built docker image to cloud run:
+gcloud run deploy data-vendor  --image gcr.io/influencer-272204/data_vendor --service-account=65044462485-compute@developer.gserviceaccount.com --add-cloudsql-instances influencer-272204:us-central1:influencersql --update-env-vars INSTANCE_CONNECTION_NAME="influencer-272204:us-central1:influencersql"
+
+Backup command to update existing services with access to cloudsql:
+gcloud run services update data-vendor --add-cloudsql-instances influencer-272204:us-central1:influencersql --update-env-vars INSTANCE_CONNECTION_NAME="influencer-272204:us-central1:influencersql"
+
+
+Local build docker image, push to remote, then deploy remotely:
+docker build . --tag gcr.io/influencer-272204/data_vendor
+docker push gcr.io/influencer-272204/data_vendor
+
+# This is to deploy prod
+gcloud builds submit --tag gcr.io/influencer-272204/data_vendor
+gcloud run deploy data-vendor --platform managed --region us-central1 --image gcr.io/influencer-272204/data_vendor --service-account=cloud-run-prod@influencer-272204.iam.gserviceaccount.com --add-cloudsql-instances influencer-272204:us-central1:influencersql --update-env-vars INSTANCE_CONNECTION_NAME="influencer-272204:us-central1:influencersql"
+
+To obtain a testing idToken for local curl testing to by pass authentication requirements, run the following
+and copy the "idToken" from the returned results json:
+curl 'https://securetoken.googleapis.com/v1/token?key=AIzaSyBUv4Ms89_KK7nZ_fcw0sBHik23XH_ergA' -H 'Content-Type: application/x-www-form-urlencoded' --data 'grant_type=refresh_token&refresh_token=AE0u-Nd9jNsiulzKAU2d3Z4HdMNXWVhWOmEICWds73tSIM-9aSfr_Z1O-1S34eOeMVhY9LUOWT6yICgq1lw4G45pEUSlSFPNlU5VZ1_OVsoZyqHPUcJY59cxVmfo79oBEml5BW0CrsZkQ9B5TBOz2zxKYT1jYmXJjLniCluviYBLOCtfzJPZArvP8eq8YO5Dz6Ddma8OL_8l9qYbN5jBYzADL53ZT8jdBw'
+
+Test fetching instagram profile:
+curl  -H "Authorization:<id_token>" "https://discover.lifo.ai/am/instagram/profile?userId=instagram&force_update=true" -X GET
+
+Test filter modash profile:
+curl -H "Content-Type: application/json"  -H "Authorization:<id_token>" -X POST "https://discover.lifo.ai/am/modash/match" -d @modash_filtering.json
+
+
+Test search instagram profile:
+curl -H "Content-Type: application/json" -H "Authorization:<id_token>" "https://discover.lifo.ai/am/instagram/search" -X POST -d @modash_ins_search.json
+
+Test locations/languages/brands/interests:
+curl  -H "Authorization:<id_token>" "https://discover.lifo.ai/am/instagram/interests" -X GET
+
+
+Test get shopify shop information:
+curl  -H "Authorization:<id_token>" "https://discover.lifo.ai/am/shopify_shop_info?shop=meteneus.myshopify.com" -X GET
+
+Deploy to testing
+gcloud builds submit --tag gcr.io/influencer-272204/data_vendor_test
+gcloud run deploy data-vendor-test --platform managed --region us-central1 --image gcr.io/influencer-272204/data_vendor_test --service-account=cloud-run-prod@influencer-272204.iam.gserviceaccount.com --add-cloudsql-instances influencer-272204:us-central1:influencersql --update-env-vars INSTANCE_CONNECTION_NAME="influencer-272204:us-central1:influencersql"

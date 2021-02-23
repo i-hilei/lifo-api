@@ -1,0 +1,10 @@
+{
+  "template_name": "test_template",
+  "subject":"Lifo IPO",
+  "body":"<html><body><p>Hi, $(receiver_name), if you are interested, click on the following link https://login.lifo.ai/$(brand_campaign_id)/$(inf_email))<br><span> <img src=\"cid:$(file_id)\"> </span><br></p></body></html>",
+  "to_name": "Arthur Meng",
+  "to_email": "cmeng87@gmail.com",
+  "brand_campaign_id": "6ayxVa4PfntPTgyoJzIs",
+  "account_id": "arthurmeng",
+  "sender_name": "arthur"
+}

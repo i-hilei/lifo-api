@@ -1,0 +1,16 @@
+Flask>=0.11
+Flask-Dance>=0.11.1
+flask_cors
+
+requests
+
+nylas
+
+google-cloud-logging
+google-cloud-secret-manager==1.0.0
+firebase_admin
+google-cloud-firestore
+
+SQLAlchemy
+PyMySQL==0.9.3
+pg8000
